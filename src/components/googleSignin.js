@@ -5,6 +5,7 @@ import { Avatar, Button, IconButton } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import miracleLogo from '../assets/miracle-logo-white.svg'; 
+import googleLogo from '../assets/google-logo.png'
 
 import {
   Card,
@@ -81,14 +82,7 @@ return(
            
             
         </Box>
-    {/* <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh', // Full viewport height
-      }}
-    > */}
+
     <Box
   sx={{
     display: 'flex',
@@ -98,19 +92,7 @@ return(
   }}
 >
 
-      {/* <Card
-        sx={{
-          maxWidth: 400,
-          height:300,
-          width:300,
-          padding: 3,
-          boxShadow: 3, // Subtle shadow for depth
-          borderRadius: 3, // Rounded corners
-          backgroundColor: 'white', // Clean white background
-           boxShadow: '0px 4px 15px rgba(25, 118, 210, 0.5)', // RGB box shadow
-        }}
-        
-      > */}
+     
       <Card
   sx={{
     maxWidth: 400,
@@ -134,35 +116,7 @@ return(
     color: 'rgb(40, 40, 40)', // Dark color for the title
   }}
 />
-
-        {/* <Image style={{
-          display: 'block',
-          maxWidth: '100%',
-          width: '100px',height: "100px"}}
-        src={voice} alt="Voice"/> */}
-
-
-        {/* <CardContent>
-          
-           
-      {!profile ? <><Button
-              variant="contained"
-              color="primary"
-              fullWidth
-              onClick={login}
-              style={{ marginBottom: '10px' }}
-            >
-              Sign in with Google
-            </Button>  </>:
-            <>
-            <IconButton  sx={{ p: 0 }}>
-                        <Avatar alt="Remy Sharp" src={profile.picture} />
-                    </IconButton>
-            </>}  
-             
-         
-          
-        </CardContent> */}
+<br></br><br></br><br></br>
         <CardContent sx={{
 display: 'flex',
 flexDirection: 'column',
@@ -180,9 +134,26 @@ fullWidth
 onClick={login}
 style={{ marginBottom: '10px' }}
 >
+  <img
+    src={googleLogo}
+    alt="Logo"
+    style={{ width: 46, marginRight: -12, height: 48,position:'relative',left:-40 }}
+  />
 Sign in with Google
-</Button> </>:
+</Button> 
+
+<Typography style={{paddingTop:'10%',color:'#0b57d0'}}>
+Welcome!
+Sign in quickly and securely using your Google account.
+
+</Typography>
+</>:
 <>
+
+
+
+
+
 <IconButton sx={{ p: 0 }}>
 <Avatar alt="Remy Sharp" src={profile.picture} sx={{
 width: 100, // Set the width
@@ -211,7 +182,7 @@ borderRadius: 50,
     </Box>
     <Box component="footer" bgcolor="#282828" padding={2} textAlign="center">
         <Typography variant="body2" color="white">
-          © 2024 My Application. All rights reserved.
+        Built by Miracle Software Systems, Inc.
         </Typography>
       </Box>
       </Box>
