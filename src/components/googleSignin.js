@@ -4,14 +4,15 @@ import axios from 'axios';
 import { Avatar, Button, IconButton, AppBar, Toolbar, Typography,
   Card,CardContent,CardActions,CardHeader, Box} from "@mui/material";            
 import miracleLogo from '../assets/miracle-logo-white.svg';
+import DSlogo from '../assets/ds-24-logo-light.svg';
 import googleLogo from '../assets/google-logo.png'
-
+import Profile from "./profile";
 
 const GoogleSignIn = () => {
   
   const [user, setUser] = useState(null); 
   const [profile, setProfile] = useState(null); 
-
+  
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
       setUser(codeResponse);
@@ -21,7 +22,7 @@ const GoogleSignIn = () => {
     },
     redirectUri: 'http://localhost:3000',
   });
-
+ 
   useEffect(() => {
     if (user?.access_token) { 
       axios
@@ -48,23 +49,26 @@ const GoogleSignIn = () => {
       <Box display="flex" flexDirection="column" minHeight="100vh" height="auto" overflow="auto">
 
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static" style={{ background: '#282828' }}>
+          <AppBar position="static" elevation={1} style={{ background: '#fffffff2' }}>
             <Toolbar>
               <img
                 src={miracleLogo}
                 alt="Logo"
                 style={{ width: 156, marginRight: 10, height: 65 }}
               />
+
               <div style={{ flexGrow: 1 }} />
-              {profile && (
-                <Button color="inherit" onClick={logOut} style={{ fontWeight: 600 }}>
-                  LogOut
-                </Button>
-              )}
+              <img
+                src={DSlogo}
+                alt="Logo"
+                style={{ height: 40 }}
+              />
+             
             </Toolbar>
           </AppBar>
         </Box>
-        <Box
+        
+        {!profile ?  <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
@@ -103,26 +107,14 @@ const GoogleSignIn = () => {
               paddingBottom: '10px',
             }}>
 
-
-              {!profile ?
-                <>
+              
                   <Button
                     variant="contained"
                     fullWidth
                     onClick={login}
-                    style={{
-                      backgroundColor: 'white',
-                      color: '#4285F4',
-                      fontWeight: 'bold',
-                      border: '1px solid #4285F4',
-                      textTransform: 'none',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      marginBottom: '10px',
-                      boxShadow: "initial"
-                    }}
-                  >
+                    style={{ backgroundColor: 'white',color: '#00aae7', fontWeight: 'bold', border: '1px solid #00aae7',textTransform: 'none',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '10px', boxShadow: "initial"
+                    }}>
                     <img
                       src={googleLogo}
                       alt="Logo"
@@ -132,37 +124,21 @@ const GoogleSignIn = () => {
                         marginRight: -12,
                         position: 'relative',
                         left: -40,
-                      }}
-                    />
+                      }}/>
                     Sign in with Google
                   </Button>
-                  <Typography style={{ paddingTop: '18%', color: '#0b57d0' }}>
+                  <Typography  fontFamily='"Open Sans", sans-serif' fontWeight={600} style={{ paddingTop: '18%', color: '#00aae7' }}>
                     Welcome!
                     Sign in quickly and securely using your Google account.
                   </Typography>
-                </> :
-                <>
-                  <IconButton sx={{ p: 0 }}>
-                    <Avatar alt={profile.name} src={profile.picture} sx={{
-                      width: 100, 
-                      height: 100, 
-                      borderRadius: 50,
-                    }} />
-                  </IconButton>
-                  <Typography variant="h6" fontSize={15} component="div" >
-                    <br></br>
-                    <b>User Name :</b> {profile.name}
-                  </Typography>
-                  <Typography variant="h6" fontSize={15} component="div" >
-                    <b>Email:</b> {profile.email}
-                  </Typography>
-                </>}
             </CardContent>
             <CardActions sx={{ justifyContent: 'center', gap: 2 }}>
             </CardActions>
           </Card>
-        </Box>
-        <Box component="footer" bgcolor="#282828" padding={2} textAlign="center">
+        </Box>:
+        <Profile profile = {profile} />}
+
+        <Box component="footer" bgcolor="#282828" padding={1} textAlign="center">
           <Typography variant="body2" color="white">
             Built by Miracle Software Systems, Inc.
           </Typography>
