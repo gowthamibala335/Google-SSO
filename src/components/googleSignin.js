@@ -79,8 +79,8 @@ const GoogleSignIn = () => {
           <Card
             sx={{
               maxWidth: 400,
-              height: 282,
-              width: 320,
+              height: 330,
+              width: 350,
               padding: 3,
               borderRadius: 3,
               backgroundColor: 'white',
@@ -89,14 +89,42 @@ const GoogleSignIn = () => {
             }}
           >
 
-            <CardHeader
-              title="Google SSO"
-              sx={{
-                textAlign: 'center',
-                fontWeight: 'bold',
-                color: 'rgb(40, 40, 40)',
-              }}
-            />
+{/* <CardHeader
+title={
+<Typography
+component="span"
+sx={{
+fontWeight: 'bold',
+textAlign: 'center',
+fontSize: '1.5rem', // Adjust the font size as needed
+}}
+>
+<span style={{ color: '#00aae7' }}>Google SSO</span>
+<span style={{ color: 'rgb(40, 40, 40)' }}> Authentication</span>
+</Typography>
+}
+sx={{
+textAlign: 'center',
+}}
+/> */}
+{/* <CardHeader
+title="Google SSO Authentication"
+sx={{
+textAlign: 'center',
+fontWeight: 'bold',
+color: 'rgb(40, 40, 40)',
+whiteSpace: 'nowrap', // Prevent text from wrapping to the next line
+overflow: 'hidden', // Ensure text doesn't overflow the container
+textOverflow: 'ellipsis', // Add an ellipsis if the text is too long
+}}
+/> */}
+ <Typography variant="h6" fontFamily='"Open Sans", sans-serif' fontSize={15} component="div" style={{ color:'#00aae7',margin: 0, fontWeight: 400, fontSize: '1.5rem', lineHeight: 1.334,textAlign: 'center', }} >
+            <b>Google SSO <span style={{ color:'#282828'}}>Authentication</span></b>
+          </Typography>
+          <Typography  fontFamily='"Open Sans", sans-serif' fontWeight={600} style={{ paddingTop: '25%', color: '#00aae7' }}>
+                    Welcome!
+                    Sign in quickly and securely using your Google account.
+                  </Typography>
             <br></br>
             <CardContent sx={{
               display: 'flex',
@@ -104,7 +132,7 @@ const GoogleSignIn = () => {
               alignItems: 'center',
               justifyContent: 'flex-start',
               height: '100%',
-              paddingBottom: '10px',
+              paddingTop: '70px',
             }}>
 
               
@@ -127,10 +155,7 @@ const GoogleSignIn = () => {
                       }}/>
                     Sign in with Google
                   </Button>
-                  <Typography  fontFamily='"Open Sans", sans-serif' fontWeight={600} style={{ paddingTop: '18%', color: '#00aae7' }}>
-                    Welcome!
-                    Sign in quickly and securely using your Google account.
-                  </Typography>
+                  
             </CardContent>
             <CardActions sx={{ justifyContent: 'center', gap: 2 }}>
             </CardActions>
@@ -139,7 +164,7 @@ const GoogleSignIn = () => {
         <Profile profile = {profile}  sendData = {logOut} />}
 
         <Box component="footer" bgcolor="#282828" padding={1} textAlign="center">
-          <Typography variant="body2" color="white">
+          <Typography variant="body2" color="white" fontFamily='"Open Sans", sans-serif' >
             Built by Miracle Software Systems, Inc.
           </Typography>
         </Box>
