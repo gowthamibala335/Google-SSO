@@ -39,9 +39,9 @@ const GoogleSignIn = () => {
     }
   }, [user]);
 
-  const logOut = () => {
+  const logOut = (data) => {
     googleLogout();
-    setProfile(null); 
+    setProfile(data); 
   };
 
   return (
@@ -136,7 +136,7 @@ const GoogleSignIn = () => {
             </CardActions>
           </Card>
         </Box>:
-        <Profile profile = {profile} />}
+        <Profile profile = {profile}  sendData = {logOut} />}
 
         <Box component="footer" bgcolor="#282828" padding={1} textAlign="center">
           <Typography variant="body2" color="white">
