@@ -1,0 +1,106 @@
+/* Container for the entire profile section */
+.profile-container {
+    position: relative;
+    width: 100%;
+    /* height: 100vh; Full viewport height */
+  }
+  
+  /* Profile logo at the top-right corner */
+  .profile-logo {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+  }
+  
+  /* Profile card container */
+  .profile-card-container {
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 9;
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  /* Profile card styles - smaller size */
+  .profile-card {
+    width: 250px; /* Smaller width */
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  /* Profile header for avatar */
+  .profile-header {
+    position: relative;
+    width: 100%;
+    height: 100px; /* Smaller height */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 10px;
+  }
+  
+  /* Profile content area */
+  .profile-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced gap */
+    align-items: center;
+  }
+  
+  /* Typography - smaller font sizes */
+  .profile-content .MuiTypography-root {
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  /* Logout button styles */
+  .logout-button {
+    padding: 8px 20px;
+    background-color: rgb(0, 170, 231);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 38%;
+    text-align: center;
+  }
+  
+  .logout-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Fade-in animation for the card */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* Slide-in animation for the profile card */
+  @keyframes slideIn {
+    0% {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  

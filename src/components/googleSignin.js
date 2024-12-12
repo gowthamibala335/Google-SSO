@@ -6,7 +6,7 @@ import { Avatar, Button, IconButton, AppBar, Toolbar, Typography,
 import miracleLogo from '../assets/miracle-logo-white.svg';
 import DSlogo from '../assets/ds-24-logo-light.svg';
 import googleLogo from '../assets/google-logo.png'
-import Profile from "./profile";
+import ProfileDetails from "./profile";
 
 const GoogleSignIn = () => {
   
@@ -49,7 +49,7 @@ const GoogleSignIn = () => {
       <Box display="flex" flexDirection="column" minHeight="100vh" height="auto" overflow="auto">
 
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static" elevation={1} style={{ background: '#fffffff2' }}>
+          {/* <AppBar position="static" elevation={1} style={{ background: '#fffffff2',position:'fixed' }}>
             <Toolbar>
               <img
                 src={miracleLogo}
@@ -65,7 +65,24 @@ const GoogleSignIn = () => {
               />
              
             </Toolbar>
-          </AppBar>
+          </AppBar> */}
+          <AppBar position="static" elevation={1} style={{ background: '#fffffff2', position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }}>
+  <Toolbar>
+    <img
+      src={miracleLogo}
+      alt="Logo"
+      style={{ width: 156, marginRight: 10, height: 65 }}
+    />
+
+    <div style={{ flexGrow: 1 }} />
+    <img
+      src={DSlogo}
+      alt="Logo"
+      style={{ height: 40 }}
+    />
+  </Toolbar>
+</AppBar>
+
         </Box>
         
         {!profile ?  <Box
@@ -161,7 +178,7 @@ textOverflow: 'ellipsis', // Add an ellipsis if the text is too long
             </CardActions>
           </Card>
         </Box>:
-        <Profile profile = {profile}  sendData = {logOut} />}
+        <ProfileDetails profile = {profile}  sendData = {logOut} />}
 
         <Box component="footer" bgcolor="#282828" padding={1} textAlign="center">
           <Typography variant="body2" color="white" fontFamily='"Open Sans", sans-serif' >
