@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";                        
-import { googleLogout, useGoogleLogin } from '@react-oauth/google';                  
+import React, { useState, useEffect } from "react";
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { Avatar, Button, IconButton, AppBar, Toolbar, Typography,
-  Card,CardContent,CardActions,CardHeader, Box} from "@mui/material";            
+import {
+  Avatar, Button, IconButton, AppBar, Toolbar, Typography,
+  Card, CardContent, CardActions, CardHeader, Box
+} from "@mui/material";
 import miracleLogo from '../assets/miracle-logo-white.svg';
 import DSlogo from '../assets/ds-24-logo-light.svg';
 import googleLogo from '../assets/google-logo.png'
 import ProfileDetails from "./profile";
 
 const GoogleSignIn = () => {
-  
-  const [user, setUser] = useState(null); 
-  const [profile, setProfile] = useState(null); 
-  
+
+  const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
+
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
       setUser(codeResponse);
@@ -22,9 +24,9 @@ const GoogleSignIn = () => {
     },
     redirectUri: 'http://localhost:3000',
   });
- 
+
   useEffect(() => {
-    if (user?.access_token) { 
+    if (user?.access_token) {
       axios
         .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
           headers: {
@@ -41,7 +43,7 @@ const GoogleSignIn = () => {
 
   const logOut = (data) => {
     googleLogout();
-    setProfile(data); 
+    setProfile(data);
   };
 
   return (
@@ -49,43 +51,63 @@ const GoogleSignIn = () => {
       <Box display="flex" flexDirection="column" minHeight="100vh" height="auto" overflow="auto">
 
         <Box sx={{ flexGrow: 1 }}>
-          {/* <AppBar position="static" elevation={1} style={{ background: '#fffffff2',position:'fixed' }}>
-            <Toolbar>
-              <img
-                src={miracleLogo}
-                alt="Logo"
-                style={{ width: 156, marginRight: 10, height: 65 }}
-              />
+          <AppBar
+            position="static"
+            elevation={1}
+            style={{
+              background: '#fffffff2',
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              zIndex: 1000,
+            }}
+          >
+            <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              {/* Left Logo */}
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <img
+                  src={miracleLogo}
+                  alt="Miracle Logo"
+                  style={{
+                    width: 156,
+                    marginRight: 10,
+                    height: 65,
+                  }}
+                />
+              </Box>
 
-              <div style={{ flexGrow: 1 }} />
-              <img
-                src={DSlogo}
-                alt="Logo"
-                style={{ height: 40 }}
-              />
-             
+              {/* Center Title */}
+              {profile && <Typography
+                variant="h6"
+                fontFamily='"Open Sans", sans-serif'
+                sx={{
+                  fontSize: "1.5rem",
+                  fontWeight: 400,
+                  textAlign: "center",
+                  color: "#00aae7",
+                  flex: 1,
+                }}
+              >
+                <b>Automobile Dashboard</b>
+              </Typography>}
+
+              {/* Right Logo */}
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <img
+                  src={DSlogo}
+                  alt="DS Logo"
+                  style={{
+                    height: 40,
+                  }}
+                />
+              </Box>
             </Toolbar>
-          </AppBar> */}
-          <AppBar position="static" elevation={1} style={{ background: '#fffffff2', position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }}>
-  <Toolbar>
-    <img
-      src={miracleLogo}
-      alt="Logo"
-      style={{ width: 156, marginRight: 10, height: 65 }}
-    />
-
-    <div style={{ flexGrow: 1 }} />
-    <img
-      src={DSlogo}
-      alt="Logo"
-      style={{ height: 40 }}
-    />
-  </Toolbar>
-</AppBar>
-
+          </AppBar>
         </Box>
-        
-        {!profile ?  <Box
+
+
+        {!profile ? <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
@@ -106,7 +128,7 @@ const GoogleSignIn = () => {
             }}
           >
 
-{/* <CardHeader
+            {/* <CardHeader
 title={
 <Typography
 component="span"
@@ -124,7 +146,7 @@ sx={{
 textAlign: 'center',
 }}
 /> */}
-{/* <CardHeader
+            {/* <CardHeader
 title="Google SSO Authentication"
 sx={{
 textAlign: 'center',
@@ -135,13 +157,13 @@ overflow: 'hidden', // Ensure text doesn't overflow the container
 textOverflow: 'ellipsis', // Add an ellipsis if the text is too long
 }}
 /> */}
- <Typography variant="h6" fontFamily='"Open Sans", sans-serif' fontSize={15} component="div" style={{ color:'#00aae7',margin: 0, fontWeight: 400, fontSize: '1.5rem', lineHeight: 1.334,textAlign: 'center', }} >
-            <b>Google SSO <span style={{ color:'#282828'}}>Authentication</span></b>
-          </Typography>
-          <Typography  fontFamily='"Open Sans", sans-serif' fontWeight={600} style={{ paddingTop: '25%', color: '#00aae7' }}>
-                    Welcome!
-                    Sign in quickly and securely using your Google account.
-                  </Typography>
+            <Typography variant="h6" fontFamily='"Open Sans", sans-serif' fontSize={15} component="div" style={{ color: '#00aae7', margin: 0, fontWeight: 400, fontSize: '1.5rem', lineHeight: 1.334, textAlign: 'center', }} >
+              <b>Google SSO <span style={{ color: '#282828' }}>Authentication</span></b>
+            </Typography>
+            <Typography fontFamily='"Open Sans", sans-serif' fontWeight={600} style={{ paddingTop: '25%', color: '#00aae7' }}>
+              Welcome!
+              Sign in quickly and securely using your Google account.
+            </Typography>
             <br></br>
             <CardContent sx={{
               display: 'flex',
@@ -152,35 +174,44 @@ textOverflow: 'ellipsis', // Add an ellipsis if the text is too long
               paddingTop: '70px',
             }}>
 
-              
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    onClick={login}
-                    style={{ backgroundColor: 'white',color: '#00aae7', fontWeight: 'bold', border: '1px solid #00aae7',textTransform: 'none',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '10px', boxShadow: "initial"
-                    }}>
-                    <img
-                      src={googleLogo}
-                      alt="Logo"
-                      style={{
-                        width: 38,
-                        height: 38,
-                        marginRight: -12,
-                        position: 'relative',
-                        left: -40,
-                      }}/>
-                    Sign in with Google
-                  </Button>
-                  
+
+              <Button
+                variant="contained"
+                fullWidth
+                onClick={login}
+                style={{
+                  backgroundColor: 'white', color: '#00aae7', fontWeight: 'bold', border: '1px solid #00aae7', textTransform: 'none',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '10px', boxShadow: "initial"
+                }}>
+                <img
+                  src={googleLogo}
+                  alt="Logo"
+                  style={{
+                    width: 38,
+                    height: 38,
+                    marginRight: -12,
+                    position: 'relative',
+                    left: -40,
+                  }} />
+                Sign in with Google
+              </Button>
+
             </CardContent>
             <CardActions sx={{ justifyContent: 'center', gap: 2 }}>
             </CardActions>
           </Card>
-        </Box>:
-        <ProfileDetails profile = {profile}  sendData = {logOut} />}
+        </Box> :
+          <ProfileDetails profile={profile} sendData={logOut} />}
 
-        <Box component="footer" bgcolor="#282828" padding={1} textAlign="center">
+        <Box component="footer" sx={{
+          backgroundColor: "#282828",
+          padding: 1,
+          textAlign: "center",
+          marginTop: "auto",
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+        }}>
           <Typography variant="body2" color="white" fontFamily='"Open Sans", sans-serif' >
             Built by Miracle Software Systems, Inc.
           </Typography>

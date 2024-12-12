@@ -39,7 +39,7 @@ const badgeColors = {
 function Dashboard() {
   return (
     <div className="dashboard-container">
-      <h1>Automobile Dashboard</h1>
+      {/* <h1>Automobile Dashboard</h1> */}
       <div className="automobile-categories">
         {automobileData.map((auto, index) => (
           <div key={index} className="automobile-card">

@@ -34,6 +34,7 @@
     overflow: hidden;
     position: relative;
     animation: slideIn 0.3s ease-out;
+    top: 60px
   }
   
   /* Profile header for avatar */
