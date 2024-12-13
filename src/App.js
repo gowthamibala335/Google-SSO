@@ -4,9 +4,8 @@ function App() {
 
   return (
     <div>
-      <GoogleSignIn />
+      <GoogleSignIn /> 
     </div>
-    
   );
 }
 
