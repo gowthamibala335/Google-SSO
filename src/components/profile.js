@@ -4,20 +4,19 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BadgeIcon from '@mui/icons-material/Badge';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import LogoutIcon from '@mui/icons-material/Logout';
-// Utility function to convert text to title case
+
 const toTitleCase = (str) => {
   const lowerCaseWords = ['a', 'an', 'and', 'but', 'for', 'nor', 'of', 'on', 'or', 'so', 'the', 'to', 'up', 'yet'];
 
   return str
-    .split(' ') // Split the string into words
+    .split(' ')
     .map((word, index) => {
-      // Capitalize first and last word, or any word that isn't in the exceptions list
       if (index === 0 || index === str.split(' ').length - 1 || !lowerCaseWords.includes(word.toLowerCase())) {
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
       }
-      return word.toLowerCase(); // For lower-case words (except first/last), return them in lowercase
+      return word.toLowerCase();
     })
-    .join(' '); // Join the words back together with spaces
+    .join(' ');
 };
 const Profile = ({ profile, sendData }) => {
   const [userProfile, setUserProfile] = useState(profile)
@@ -26,26 +25,24 @@ const Profile = ({ profile, sendData }) => {
     sendData(null)
     setUserProfile(null);
   };
+
   return (
     <Box display="flex" flexDirection="column" height="84vh" overflow="hidden">
-      {/* AppBar */}
       <AppBar position="static" sx={{ background: '#00aae7' }}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold', fontFamily: '"Open Sans", sans-serif' }}>
             Welcome, {toTitleCase(userProfile.name)}
           </Typography>
           <Tooltip title="Logout">
-            <IconButton sx={{color:"#fff"}} onClick={logOut}>
+            <IconButton sx={{ color: "#fff" }} onClick={logOut}>
               <LogoutIcon />
             </IconButton>
           </Tooltip>
         </Toolbar>
       </AppBar>
 
-      {/* Main Content */}
       <Box flexGrow={1} padding={4} bgcolor="#f4f4f4" overflow="auto">
         <Grid container spacing={4}>
-          {/* User Profile Section */}
           <Grid item xs={12} md={4} >
             <Paper elevation={12} sx={{
               padding: 3,
@@ -76,8 +73,6 @@ const Profile = ({ profile, sendData }) => {
               <Typography variant="body1" sx={{ color: '#888', fontSize: '1rem', marginBottom: 3, fontFamily: '"Open Sans", sans-serif' }}>
                 {userProfile.email}
               </Typography>
-            
-
             </Paper>
           </Grid>
           <Grid item xs={12} md={8}>
@@ -133,8 +128,6 @@ const Profile = ({ profile, sendData }) => {
           </Grid>
         </Grid>
       </Box>
-
-
     </Box>
   );
 };

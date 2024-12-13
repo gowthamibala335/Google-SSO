@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { Avatar, Button, AppBar, Toolbar, Typography, Card, CardContent, Box } from "@mui/material";
+import { Button, AppBar, Toolbar, Typography, Card, CardContent, Box } from "@mui/material";
 import miracleLogo from '../assets/miracle-logo-white.svg';
 import DSlogo from '../assets/ds-24-logo-light.svg';
 import googleLogo from '../assets/google-logo.png';
@@ -9,13 +9,11 @@ import Profile from "./profile";
 
 const GoogleSignIn = () => {
   const [user, setUser] = useState(() => {
-    // Retrieve user data from localStorage on page load
     const storedUser = localStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
   const [profile, setProfile] = useState(() => {
-    // Retrieve profile data from localStorage on page load
     const storedProfile = localStorage.getItem("profile");
     return storedProfile ? JSON.parse(storedProfile) : null;
   });
@@ -24,10 +22,9 @@ const GoogleSignIn = () => {
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
       setUser(codeResponse);
-      // Save login data to localStorage
       localStorage.setItem("user", JSON.stringify(codeResponse));
     },
-    onError: (error) => console.log('Login Failed:', error),
+    onError: (error) => alert('Login Failed:', error),
   });
 
   useEffect(() => {
@@ -42,10 +39,9 @@ const GoogleSignIn = () => {
         })
         .then((res) => {
           setProfile(res.data);
-          // Save profile data to localStorage
           localStorage.setItem("profile", JSON.stringify(res.data));
         })
-        .catch((err) => console.log(err));
+        .catch((err) =>alert(err));
     }
   }, [user, profile]);
 
@@ -54,7 +50,6 @@ const GoogleSignIn = () => {
     googleLogout();
     setUser(data);
     setProfile(data);
-    // Clear user data from localStorage
     localStorage.removeItem("user");
     localStorage.removeItem("profile");
   };
