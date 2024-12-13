@@ -6,7 +6,7 @@ import miracleLogo from '../assets/miracle-logo-white.svg';
 import DSlogo from '../assets/ds-24-logo-light.svg';
 import googleLogo from '../assets/google-logo.png'
 import ProfileDetails from "./profile";
-
+import './googleSignin.css';
 const GoogleSignIn = () => {
 
   const [user, setUser] = useState(() => {
@@ -62,7 +62,7 @@ const GoogleSignIn = () => {
           <AppBar
             position="static"
             elevation={1}
-            style={{
+            sx={{
               background: '#fffffff2',
               position: 'fixed',
               top: 0,
@@ -134,9 +134,9 @@ const GoogleSignIn = () => {
             <Typography variant="h6" fontFamily='"Open Sans", sans-serif' fontSize={15} component="div" style={{ color: '#00aae7', margin: 0, fontWeight: 400, fontSize: '1.5rem', lineHeight: 1.334, textAlign: 'center', }} >
               <b>Google SSO <span style={{ color: '#282828' }}>Authentication</span></b>
             </Typography>
-            <Typography fontFamily='"Open Sans", sans-serif' fontWeight={600} style={{ paddingTop: '25%', color: '#00aae7' }}>
-              Welcome!
-              Sign in quickly and securely using your Google account.
+            <Typography fontFamily='"Open Sans", sans-serif' fontWeight={400} style={{ paddingTop: '12%', color: '#00aae7',textAlign:'justify' }}>
+            <span style={{color:"#00aae7",fontWeight:600}}>"Log in securely and effortlessly using Google Single Sign-On (SSO)"</span>. With just one click, access your account without the need to remember multiple passwords. 
+            Enjoy seamless and reliable authentication powered by Google's trusted infrastructure.
             </Typography>
             <br></br>
             <CardContent sx={{
@@ -145,7 +145,7 @@ const GoogleSignIn = () => {
               alignItems: 'center',
               justifyContent: 'flex-start',
               height: '100%',
-              paddingTop: '70px',
+              paddingTop: '30px',
             }}>
               <Button
                 variant="contained"
