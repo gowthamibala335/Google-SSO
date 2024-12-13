@@ -25,7 +25,7 @@ const GoogleSignIn = () => {
       setUser(codeResponse);
       localStorage.setItem("user", JSON.stringify(codeResponse));
     },
-    onError: (error) => console.log('Login Failed:', error),
+    onError: (error) => alert('Login Failed:', error),
   });
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const GoogleSignIn = () => {
           setProfile(res.data);
           localStorage.setItem("profile", JSON.stringify(res.data));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => alert(err));
     }
   }, [user, profile]);
 
