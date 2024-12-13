@@ -108,8 +108,9 @@ const GoogleSignIn = () => {
             >
               <b>Google SSO <span style={{ color: '#282828' }}>Authentication</span></b>
             </Typography>
-            <Typography fontFamily='"Open Sans", sans-serif' fontWeight={600} style={{ paddingTop: '25%', color: '#00aae7' }}>
-              Welcome! Sign in quickly and securely using your Google account.
+            <Typography fontFamily='"Open Sans", sans-serif' fontWeight={400} style={{ paddingTop: '12%', color: '#00aae7',textAlign:'justify' }}>
+            <span style={{color:"#00aae7",fontWeight:600}}>"Log in securely and effortlessly using Google Single Sign-On (SSO)"</span>. With just one click, access your account without the need to remember multiple passwords. 
+            Enjoy seamless and reliable authentication powered by Google's trusted infrastructure.
             </Typography>
             <br />
             <CardContent
@@ -119,7 +120,7 @@ const GoogleSignIn = () => {
                 alignItems: 'center',
                 justifyContent: 'flex-start',
                 height: '100%',
-                paddingTop: '70px',
+                paddingTop: '30px',
               }}
             >
               <Button
