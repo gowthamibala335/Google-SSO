@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import {
-  Avatar, Button, IconButton, AppBar, Toolbar, Typography,
-  Card, CardContent, CardActions, CardHeader, Box
-} from "@mui/material";
+import {Button, AppBar, Toolbar, Typography,Card, CardContent, CardActions,Box } from "@mui/material";
 import miracleLogo from '../assets/miracle-logo-white.svg';
 import DSlogo from '../assets/ds-24-logo-light.svg';
 import googleLogo from '../assets/google-logo.png'
@@ -12,21 +9,28 @@ import ProfileDetails from "./profile";
 
 const GoogleSignIn = () => {
 
-  const [user, setUser] = useState(null);
-  const [profile, setProfile] = useState(null);
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
+  const [profile, setProfile] = useState(() => {
+    const storedProfile = localStorage.getItem("profile");
+    return storedProfile ? JSON.parse(storedProfile) : null;
+  });
+
+  // Google Login Functionality
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
       setUser(codeResponse);
+      localStorage.setItem("user", JSON.stringify(codeResponse));
     },
-    onError: (error) => {
-      console.log('Login Failed:', error);
-    },
-    redirectUri: 'http://localhost:3000',
+    onError: (error) => console.log('Login Failed:', error),
   });
 
   useEffect(() => {
-    if (user?.access_token) {
+    // Fetch profile information if user is logged in
+    if (user && !profile) {
       axios
         .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
           headers: {
@@ -36,20 +40,24 @@ const GoogleSignIn = () => {
         })
         .then((res) => {
           setProfile(res.data);
+          localStorage.setItem("profile", JSON.stringify(res.data));
         })
-        .catch((err) => console.log('Error fetching profile:', err));
+        .catch((err) => console.log(err));
     }
-  }, [user]);
+  }, [user, profile]);
 
+  // Logout Functionality
   const logOut = (data) => {
     googleLogout();
+    setUser(data);
     setProfile(data);
+    localStorage.removeItem("user");
+    localStorage.removeItem("profile");
   };
 
   return (
     <>
       <Box display="flex" flexDirection="column" minHeight="100vh" height="auto" overflow="auto">
-
         <Box sx={{ flexGrow: 1 }}>
           <AppBar
             position="static"
@@ -64,7 +72,6 @@ const GoogleSignIn = () => {
             }}
           >
             <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              {/* Left Logo */}
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <img
                   src={miracleLogo}
@@ -77,7 +84,6 @@ const GoogleSignIn = () => {
                 />
               </Box>
 
-              {/* Center Title */}
               {profile && <Typography
                 variant="h6"
                 fontFamily='"Open Sans", sans-serif'
@@ -92,7 +98,6 @@ const GoogleSignIn = () => {
                 <b>Automobile Dashboard</b>
               </Typography>}
 
-              {/* Right Logo */}
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <img
                   src={DSlogo}
@@ -105,7 +110,6 @@ const GoogleSignIn = () => {
             </Toolbar>
           </AppBar>
         </Box>
-
 
         {!profile ? <Box
           sx={{
@@ -124,39 +128,9 @@ const GoogleSignIn = () => {
               borderRadius: 3,
               backgroundColor: 'white',
               boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.2)'
-
             }}
           >
 
-            {/* <CardHeader
-title={
-<Typography
-component="span"
-sx={{
-fontWeight: 'bold',
-textAlign: 'center',
-fontSize: '1.5rem', // Adjust the font size as needed
-}}
->
-<span style={{ color: '#00aae7' }}>Google SSO</span>
-<span style={{ color: 'rgb(40, 40, 40)' }}> Authentication</span>
-</Typography>
-}
-sx={{
-textAlign: 'center',
-}}
-/> */}
-            {/* <CardHeader
-title="Google SSO Authentication"
-sx={{
-textAlign: 'center',
-fontWeight: 'bold',
-color: 'rgb(40, 40, 40)',
-whiteSpace: 'nowrap', // Prevent text from wrapping to the next line
-overflow: 'hidden', // Ensure text doesn't overflow the container
-textOverflow: 'ellipsis', // Add an ellipsis if the text is too long
-}}
-/> */}
             <Typography variant="h6" fontFamily='"Open Sans", sans-serif' fontSize={15} component="div" style={{ color: '#00aae7', margin: 0, fontWeight: 400, fontSize: '1.5rem', lineHeight: 1.334, textAlign: 'center', }} >
               <b>Google SSO <span style={{ color: '#282828' }}>Authentication</span></b>
             </Typography>
@@ -173,8 +147,6 @@ textOverflow: 'ellipsis', // Add an ellipsis if the text is too long
               height: '100%',
               paddingTop: '70px',
             }}>
-
-
               <Button
                 variant="contained"
                 fullWidth
@@ -195,13 +167,11 @@ textOverflow: 'ellipsis', // Add an ellipsis if the text is too long
                   }} />
                 Sign in with Google
               </Button>
-
             </CardContent>
             <CardActions sx={{ justifyContent: 'center', gap: 2 }}>
             </CardActions>
           </Card>
-        </Box> :
-          <ProfileDetails profile={profile} sendData={logOut} />}
+        </Box> : <ProfileDetails profile={profile} sendData={logOut} />}
 
         <Box component="footer" sx={{
           backgroundColor: "#282828",

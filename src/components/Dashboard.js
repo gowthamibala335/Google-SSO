@@ -1,15 +1,14 @@
 import React from 'react';
 import './Dashboard.css';
-import suvImage from '../assets/suv.jpg'; 
-
-import electic from '../assets/electric.png'; 
-
-import minivan from '../assets/minivan.jpg'; 
-import sedan from '../assets/sedan.jpg'; 
-import truck from '../assets/truck.png'; 
-import convertible from '../assets/convertable.jpg'; 
-import coupe from '../assets/coupe.jpg'; 
+import suvImage from '../assets/suv.jpg';
+import electic from '../assets/electric.png';
+import minivan from '../assets/minivan.jpg';
+import sedan from '../assets/sedan.jpg';
+import truck from '../assets/truck.png';
+import convertible from '../assets/convertable.jpg';
+import coupe from '../assets/coupe.jpg';
 import hatchback from '../assets/hatchback.jpg';
+
 const automobileData = [
   { title: 'SUV', price: '$30,000', rating: 4.5, image: suvImage, description: 'A spacious and comfortable vehicle for families.' },
   { title: 'Sedan', price: '$20,000', rating: 4.2, image: sedan, description: 'A sleek, stylish, and affordable option.', badge: 'Best Seller' },
@@ -39,7 +38,6 @@ const badgeColors = {
 function Dashboard() {
   return (
     <div className="dashboard-container">
-      {/* <h1>Automobile Dashboard</h1> */}
       <div className="automobile-categories">
         {automobileData.map((auto, index) => (
           <div key={index} className="automobile-card">
@@ -56,7 +54,6 @@ function Dashboard() {
             <div >
               <h2 className="title" style={{ margin: 4 }}>{auto.title}</h2>
               <p className="price" style={{ margin: 4 }}>{auto.price}</p>
-              {/* <p className="description">{auto.description}</p> */}
               <p className="rating" style={{ margin: 4 }}>Rating: {auto.rating} ⭐</p>
             </div>
           </div>
