@@ -47,6 +47,14 @@ const GoogleSignIn = () => {
 
   // Logout Functionality
   const logOut = (data) => {
+     const logoutWindow = window.open(
+      'https://accounts.google.com/Logout',
+      '_blank',
+      'width=500,height=600'
+    );
+    if (logoutWindow) {
+      setTimeout(() => logoutWindow.close(), 2000); 
+    }
     googleLogout();
     setUser(data);
     setProfile(data);
