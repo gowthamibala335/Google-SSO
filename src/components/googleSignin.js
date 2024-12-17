@@ -6,6 +6,7 @@ import miracleLogo from '../assets/miracle-logo-white.svg';
 import DSlogo from '../assets/ds-24-logo-light.svg';
 import googleLogo from '../assets/google-logo.png'
 import ProfileDetails from "./profile";
+import './googleSignin.css';
 const GoogleSignIn = () => {
 
   const [user, setUser] = useState(() => {
